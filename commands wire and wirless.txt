@@ -1,0 +1,74 @@
+wire: 
+pc1  ip:192.168.1.10  default:192.168.1.1 
+pc2  ip:192.168.1.11  default:192.168.1.1 
+
+wireless:
+laptop:  default:192.168.2.10  default:192.168.2.1 etc
+++
+
+
+#####1######################################
+enable
+
+configure terminal
+
+
+
+interface FastEthernet0/0
+
+ ip address 192.168.1.1 255.255.255.0
+
+ no shutdown
+
+exit
+
+
+
+ip dhcp excluded-address 192.168.1.1 192.168.1.10
+
+
+
+ip dhcp pool MY_POOL
+
+ network 192.168.1.0 255.255.255.0
+
+ default-router 192.168.1.1
+
+ dns-server 8.8.8.8
+
+exit
+end '
+
+
+#####2 or######
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
+
+interface GigabitEthernet0/1
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+exit
+
+end
+write memory
+########################
+
+***access pointer:
+cong->port1-> SSID:FTTH
+             WPA@,psk :tick
+             passset:
+
+also for all wirless device: 
+cong->port1-> SSID:FTTH
+             WPA@,psk :tick
+             passset:
+
+
+
+
+
